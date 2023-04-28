@@ -10,8 +10,8 @@ import clsx from 'clsx';
 import {translate} from '@docusaurus/Translate';
 import {useThemeConfig} from '@docusaurus/theme-common';
 import Link from '@docusaurus/Link';
+import copy from 'copy-to-clipboard';
 import type {Props} from '@theme/Heading';
-
 import styles from './styles.module.css';
 
 export default function Heading({as: As, id, ...props}: Props): JSX.Element {
@@ -33,6 +33,9 @@ export default function Heading({as: As, id, ...props}: Props): JSX.Element {
       heading: typeof props.children === 'string' ? props.children : id,
     },
   );
+  const handleHashClick = () => {
+    copy(window.location.href);
+  };
 
   return (
     <As
@@ -47,6 +50,7 @@ export default function Heading({as: As, id, ...props}: Props): JSX.Element {
       id={id}>
       {props.children}
       <Link
+        onClick={handleHashClick}
         className="hash-link"
         to={`#${id}`}
         aria-label={anchorTitle}
